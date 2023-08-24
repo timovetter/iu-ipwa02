@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+   <link rel="stylesheet" type="text/css" media="screen" href="register.css"/>
+   <title>Registrieren</title>
+</h:head>
+<h:body>
+   <div class="center">
+      <div class="font">
+         <h1 class="headline">Registrieren</h1>
+      </div>
+
+      <h:form>
+         <p:inputText placeholder="Username" class="mb-input" /><br/>
+         <p:inputText placeholder="Telefonnummer"/><br/>
+         <p:inputText type="password" class="mb-input" placeholder="Passwort"/><br/>
+
+         <p:outputLabel class="font">Ich bin...</p:outputLabel>
+<!--         <p:selectOneRadio id="page" value="#{user.type}" layout="pageDirection">-->
+<!--            <f:selectItem itemLabel="Meldende Person" itemValue="REPORTING"/>-->
+<!--            <f:selectItem itemLabel="Bergende Person" itemValue="SALVAGE"/>-->
+<!--         </p:selectOneRadio>-->
+
+         <p:commandButton value="Registrieren" action="report/index.xhtml?faces-redirect=true"/>
+      </h:form>
+   </div>
+</h:body>
+</html>

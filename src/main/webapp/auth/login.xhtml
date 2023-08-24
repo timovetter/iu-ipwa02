@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" type="text/css" media="screen" href="login.css"/>
+    <title>Willkommen - Login</title>
+</h:head>
+<h:body>
+    <div class="center">
+        <div class="font">
+            <h1 class="headline">Ghost Net Fishing - Login</h1>
+        </div>
+
+        <h:form>
+            <div class="mb-input">
+                <p:inputText id="username" placeholder="Username" value="#{loginController.username}" required="true">
+                    <f:event type="postValidate" listener="#{loginController.postValidateName}"/>
+                </p:inputText>
+            </div>
+            <div class="mb-input">
+                <p:inputText id="pass" placeholder="Passwort" type="password" required="true" validator="#{loginController.login}" value="#{loginController.password}"/>
+                <h:message for="pass"/>
+            </div>
+
+            <p:commandButton value="Login"/>
+        </h:form>
+        <p:outputLabel>Noch kein Konto? <a href="register.xhtml">Hier registrieren!</a></p:outputLabel>
+    </div>
+</h:body>
+</html>

@@ -1,26 +1,18 @@
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Named;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-import java.io.Serializable;
-
-@Named
-@SessionScoped
-public class User implements Serializable {
-    private String name;
+@Entity(name = "Account")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String username;
     private String phone;
     private UserType type;
 
-    public User() {
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public User() {}
 
     public String getPhone() {
         return phone;
@@ -28,5 +20,21 @@ public class User implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public UserType getType() {
+        return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
