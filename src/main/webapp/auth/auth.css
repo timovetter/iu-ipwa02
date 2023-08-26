@@ -1,0 +1,16 @@
+.font {
+    font-size: 32px;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+.mb {
+    margin-bottom: 10px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}

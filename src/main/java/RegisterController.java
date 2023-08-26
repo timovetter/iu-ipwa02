@@ -1,5 +1,4 @@
 import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
@@ -7,19 +6,23 @@ import java.io.Serializable;
 @Named
 @ViewScoped
 public class RegisterController implements Serializable  {
-    private User newUser;
     private String username;
     private String phone;
     private String password;
-    private UserType type;
+    private String type;
+    private final UserDAO userDAO;
 
-    @Inject
-    private ApplicationService applicationService;
-
-    public RegisterController() {}
+    public RegisterController() {
+        this.userDAO = new UserDAO();
+    }
 
     public void register() {
-
+        UserType ut = UserType.REPORT;
+        if (this.type.equals("SALVAGE")) {
+            ut = UserType.SALVAGE;
+        }
+        User newUser = new User(this.username, this.phone, ut, this.password);
+        this.userDAO.add(newUser);
     }
 
     public String getUsername() {
@@ -46,11 +49,11 @@ public class RegisterController implements Serializable  {
         this.password = password;
     }
 
-    public UserType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(UserType type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

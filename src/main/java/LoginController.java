@@ -5,23 +5,29 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.AbortProcessingException;
 import jakarta.faces.event.ComponentSystemEvent;
 import jakarta.faces.validator.ValidatorException;
-import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 @Named
 @ViewScoped
 public class LoginController implements Serializable {
     private String username;
     private String password;
-    private final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghost_net");
+    private User user;
+    private final UserDAO userDAO;
 
-    public LoginController() {}
+    @Inject
+    private UserContext userContext;
+
+    public LoginController() {
+        this.userDAO = new UserDAO();
+    }
 
     public String getUsername() {
         return username;
@@ -39,18 +45,32 @@ public class LoginController implements Serializable {
         this.password = password;
     }
 
-    public void login(FacesContext ctx, UIComponent component, Object obj) throws ValidatorException {
-        EntityManager manager = emf.createEntityManager();
-        Query q = manager.createQuery("select u from User u where username = " + this.username);
-        User u = (User) q.getSingleResult();
-        if (u == null) {
-            throw new ValidatorException(new FacesMessage("Login falsch!"));
+    public User getUser() {
+        return user;
+    }
+
+    public String submitLogin() {
+        if (user == null) {
+            return null;
+        }
+        userContext.setUser(user);
+        return "/ghost-net/list.xhtml?faces-redirect=true";
+    }
+
+    public void validateLogin(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+        Map<String, String> filter = new HashMap<>();
+        filter.put("username", username);
+        filter.put("password", (String) value);
+
+        try {
+            user = this.userDAO.findOne(filter);
+        } catch (NoResultException e) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falscher Login!", null));
         }
     }
 
     public void postValidateName(ComponentSystemEvent event) throws AbortProcessingException {
         UIInput name = (UIInput) event.getComponent();
-        this.username = (String) name.getValue();
+        username = (String) name.getValue();
     }
-
 }

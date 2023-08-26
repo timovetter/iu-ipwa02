@@ -4,27 +4,38 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <link rel="stylesheet" type="text/css" media="screen" href="login.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="auth.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../global.css"/>
     <title>Willkommen - Login</title>
 </h:head>
 <h:body>
     <div class="center">
-        <div class="font">
-            <h1 class="headline">Ghost Net Fishing - Login</h1>
-        </div>
+        <h1>Ghost Net Fishing - Login</h1>
 
         <h:form>
-            <div class="mb-input">
-                <p:inputText id="username" placeholder="Username" value="#{loginController.username}" required="true">
-                    <f:event type="postValidate" listener="#{loginController.postValidateName}"/>
-                </p:inputText>
+            <div>
+                <div>
+                    <p:inputText class="mb" id="username" placeholder="Username" value="#{loginController.username}" required="true">
+                        <f:event type="postValidate" listener="#{loginController.postValidateName}"/>
+                    </p:inputText>
+                </div>
+                <p:message for="username" class="mb"/>
             </div>
-            <div class="mb-input">
-                <p:inputText id="pass" placeholder="Passwort" type="password" required="true" validator="#{loginController.login}" value="#{loginController.password}"/>
-                <h:message for="pass"/>
+            <div>
+                <div>
+                    <p:inputText
+                            id="pass"
+                            placeholder="Passwort"
+                            type="password"
+                            required="true"
+                            class="mb"
+                            validator="#{loginController.validateLogin}"
+                            value="#{loginController.password}"/>
+                </div>
+                <p:message for="pass" class="mb"/>
             </div>
 
-            <p:commandButton value="Login"/>
+            <p:commandButton value="Login" ajax="false" action="#{loginController.submitLogin()}"/>
         </h:form>
         <p:outputLabel>Noch kein Konto? <a href="register.xhtml">Hier registrieren!</a></p:outputLabel>
     </div>

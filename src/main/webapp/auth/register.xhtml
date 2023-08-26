@@ -4,27 +4,26 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-   <link rel="stylesheet" type="text/css" media="screen" href="register.css"/>
+   <link rel="stylesheet" type="text/css" media="screen" href="auth.css"/>
+   <link rel="stylesheet" type="text/css" media="screen" href="../global.css"/>
    <title>Registrieren</title>
 </h:head>
 <h:body>
    <div class="center">
-      <div class="font">
-         <h1 class="headline">Registrieren</h1>
-      </div>
+      <p:outputLabel styleClass="headline">Registrieren</p:outputLabel>
 
       <h:form>
-         <p:inputText placeholder="Username" class="mb-input" /><br/>
-         <p:inputText placeholder="Telefonnummer"/><br/>
-         <p:inputText type="password" class="mb-input" placeholder="Passwort"/><br/>
+         <p:inputText placeholder="Username" class="mb" value="#{registerController.username}" /><br/>
+         <p:inputText placeholder="Telefonnummer" class="mb" value="#{registerController.phone}"/><br/>
+         <p:inputText type="password" class="mb" placeholder="Passwort" value="#{registerController.password}"/><br/>
 
          <p:outputLabel class="font">Ich bin...</p:outputLabel>
-<!--         <p:selectOneRadio id="page" value="#{user.type}" layout="pageDirection">-->
-<!--            <f:selectItem itemLabel="Meldende Person" itemValue="REPORTING"/>-->
-<!--            <f:selectItem itemLabel="Bergende Person" itemValue="SALVAGE"/>-->
-<!--         </p:selectOneRadio>-->
+         <p:selectOneRadio id="page" value="#{registerController.type}" layout="pageDirection">
+            <f:selectItem itemLabel="Meldende Person" itemValue="REPORTING"/>
+            <f:selectItem itemLabel="Bergende Person" itemValue="SALVAGE"/>
+         </p:selectOneRadio>
 
-         <p:commandButton value="Registrieren" action="report/index.xhtml?faces-redirect=true"/>
+         <p:commandButton value="Registrieren" action="#{registerController.register()}"/>
       </h:form>
    </div>
 </h:body>
