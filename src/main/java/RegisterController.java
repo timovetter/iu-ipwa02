@@ -1,3 +1,6 @@
+import dao.UserDAO;
+import entities.User;
+import entities.UserType;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 

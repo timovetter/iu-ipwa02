@@ -1,3 +1,7 @@
+package dao;
+
+import entities.User;
+
 import javax.persistence.*;
 import java.util.Map;
 
@@ -24,7 +28,7 @@ public class UserDAO {
 
     private String buildSQL(Map<String, String> filter) {
         StringBuilder sqlStatement = new StringBuilder();
-        sqlStatement.append("SELECT u FROM User u");
+        sqlStatement.append("SELECT u FROM entities.User u");
         boolean addAND = false;
         for (var entry : filter.entrySet()) {
             if (addAND) sqlStatement.append(" AND ");

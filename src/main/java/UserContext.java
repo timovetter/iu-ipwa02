@@ -1,3 +1,4 @@
+import entities.User;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 

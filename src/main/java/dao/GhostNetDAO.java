@@ -1,3 +1,7 @@
+package dao;
+
+import entities.GhostNet;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -6,11 +10,11 @@ public class GhostNetDAO {
 
     public void add (GhostNet ghostNet) {
         EntityManager manager = emf.createEntityManager();
-        EntityTransaction transaction = manager.getTransaction();
+        EntityTransaction t = manager.getTransaction();
 
-        transaction.begin();
+        t.begin();
         manager.persist(ghostNet);
-        transaction.commit();
+        t.commit();
 
         manager.close();
     }
@@ -21,5 +25,16 @@ public class GhostNetDAO {
         List<GhostNet> list = query.getResultList();
         manager.close();
         return list;
+    }
+
+    public void update(GhostNet ghostNet) {
+        EntityManager manager = emf.createEntityManager();
+        EntityTransaction t = manager.getTransaction();
+
+        t.begin();
+        manager.merge(ghostNet);
+        t.commit();
+
+        manager.close();
     }
 }

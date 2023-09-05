@@ -1,3 +1,5 @@
+import dao.UserDAO;
+import entities.User;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.component.UIInput;

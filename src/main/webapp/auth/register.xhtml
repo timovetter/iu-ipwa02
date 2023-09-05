@@ -10,7 +10,7 @@
 </h:head>
 <h:body>
    <div class="center">
-      <p:outputLabel styleClass="headline">Registrieren</p:outputLabel>
+      <h1>Ghost Net Fishing - Registrieren</h1>
 
       <h:form>
          <p:inputText placeholder="Username" class="mb" value="#{registerController.username}" /><br/>
@@ -18,10 +18,12 @@
          <p:inputText type="password" class="mb" placeholder="Passwort" value="#{registerController.password}"/><br/>
 
          <p:outputLabel class="font">Ich bin...</p:outputLabel>
-         <p:selectOneRadio id="page" value="#{registerController.type}" layout="pageDirection">
-            <f:selectItem itemLabel="Meldende Person" itemValue="REPORTING"/>
-            <f:selectItem itemLabel="Bergende Person" itemValue="SALVAGE"/>
-         </p:selectOneRadio>
+         <div class="flex-center">
+               <p:selectOneRadio id="page" value="#{registerController.type}" layout="pageDirection">
+                  <f:selectItem itemLabel="Meldende Person" itemValue="REPORTING"/>
+                  <f:selectItem itemLabel="Bergende Person" itemValue="SALVAGE"/>
+               </p:selectOneRadio>
+         </div>
 
          <p:commandButton value="Registrieren" action="#{registerController.register()}"/>
       </h:form>
