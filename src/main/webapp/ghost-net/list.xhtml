@@ -55,18 +55,15 @@
                     <p:commandLink
                             value="Für Bergung eintragen"
                             rendered="#{userContext.user.type == 'SALVAGE' and gn.user == null}"
-                            action="#{ghostNetListController.addSalvageUser(userContext.user, gn)}">
-                        <p:ajax event="click" update="ghostnets"/>
-                    </p:commandLink>
+                            action="#{ghostNetListController.addSalvageUser(userContext.user, gn)}" ajax="false"
+                    />
                     <p:commandLink
                             value="Netz geborgen"
+                            ajax="false"
                             rendered="#{gn.status == 'PENDING_RESCUE' and gn.user.username == userContext.user.username}"
                             action="#{ghostNetListController.netRescued(gn)}"
-                    >
-                        <p:ajax event="click" update="ghostnets"/>
-                    </p:commandLink>
+                   />
                 </p:column>
-
             </p:dataTable>
         </h:form>
     </div>
