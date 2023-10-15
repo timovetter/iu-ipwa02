@@ -16,30 +16,30 @@
          <div>
             <p:inputText id="username" placeholder="Username" required="true" value="#{registerController.username}" validator="#{registerController.validateUsername}" />
             <br/>
-            <p:message for="username" styleClass="mb"/>
+            <p:message for="username" styleClass="mb-10"/>
          </div>
 
          <div>
-            <p:inputText id="password" placeholder="Passwort" class="mb" required="true" value="#{registerController.password}" type="password"/>
+            <p:inputText id="password" placeholder="Passwort" class="mb-10" required="true" value="#{registerController.password}" type="password"/>
             <br/>
-            <p:message for="password" styleClass="mb"/><br/>
+            <p:message for="password" styleClass="mb-10"/><br/>
          </div>
 
          <p:outputLabel class="font">Ich bin...</p:outputLabel>
          <div class="flex-center">
-            <p:selectOneRadio id="page" style="margin-bottom: 30px" required="true" value="#{registerController.type}" layout="pageDirection">
+            <p:selectOneRadio id="page" styleClass="mb-30" required="true" value="#{registerController.type}" layout="pageDirection">
                <f:selectItem itemLabel="Meldende Person" itemValue="REPORTING"/>
                <f:selectItem itemLabel="Bergende Person" itemValue="SALVAGE"/>
                <f:event type="postValidate" listener="#{registerController.postValidateType}"/>
             </p:selectOneRadio>
-            <p:message for="page" styleClass="mb"/><br/>
+            <p:message for="page" styleClass="mb-10"/><br/>
          </div>
 
          <div>
             <p:inputText id="phone" placeholder="Telefonnummer" validator="#{registerController.validatePhone}" value="#{registerController.phone}">
             </p:inputText>
             <br/>
-            <p:message for="phone" styleClass="mb" style="margin-top: 10px"/><br/>
+            <p:message for="phone" styleClass="mb-10 mt-10"/><br/>
          </div>
 
          <p:commandButton value="Registrieren" ajax="false" action="#{registerController.register()}"/>

@@ -12,8 +12,16 @@
     justify-content: center;
 }
 
-.mb {
+.mb-10 {
     margin-bottom: 10px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mt-10 {
+    margin-top: 10px;
 }
 
 body {

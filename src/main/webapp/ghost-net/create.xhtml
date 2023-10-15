@@ -9,7 +9,7 @@
     <title>Geisternetz hinzufügen</title>
 </h:head>
 <h:body>
-    <p:growl id="growl-sticky" for="sticky-key" showDetail="true" />
+    <p:growl id="growl-sticky" for="sticky-key" showDetail="true"/>
     <h:form>
         <h:commandLink value="Liste der Netze" action="/ghost-net/list.xhtml?faces-redirect=true"/>
     </h:form>
@@ -21,21 +21,25 @@
                 <h2>Angaben zum Netz</h2>
                 <div class="mb-30">
                     <p><p:outputLabel for="longitude" value="Längengrad:"/></p>
-                    <p:inputNumber id="longitude" value="#{ghostNetCreateController.longitude}" decimalPlaces="5" minValue="-180" maxValue="180" required="true"/>
+                    <p:inputNumber id="longitude" value="#{ghostNetCreateController.longitude}" decimalPlaces="5"
+                                   minValue="-180" maxValue="180" required="true"/>
                 </div>
 
                 <div class="mb-30">
-                    <p><p:outputLabel for="latitude" value="Breitengrad:" /></p>
-                    <p:inputNumber id="latitude" value="#{ghostNetCreateController.latitude}" decimalPlaces="5" minValue="-90" maxValue="90" required="true"/>
+                    <p><p:outputLabel for="latitude" value="Breitengrad:"/></p>
+                    <p:inputNumber id="latitude" value="#{ghostNetCreateController.latitude}" decimalPlaces="5"
+                                   minValue="-90" maxValue="90" required="true"/>
                 </div>
 
                 <div class="mb-30">
                     <p><p:outputLabel for="size" value="Größe (geschätzt auf volle Quadtratmeter):"/></p>
-                    <p:inputNumber id="size" minValue="1" decimalPlaces="0" value="#{ghostNetCreateController.size}" required="true"/>
+                    <p:inputNumber id="size" minValue="1" decimalPlaces="0" value="#{ghostNetCreateController.size}"
+                                   required="true"/>
                 </div>
 
                 <p:messages/>
-                <p:commandButton value="Erstellen" ajax="false" action="#{ghostNetCreateController.createGhostNet()}" update="growl-sticky"/>
+                <p:commandButton value="Erstellen" ajax="false" action="#{ghostNetCreateController.createGhostNet()}"
+                                 update="growl-sticky"/>
             </h:form>
         </div>
     </div>

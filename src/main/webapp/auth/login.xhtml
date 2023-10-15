@@ -16,7 +16,8 @@
         <h:form>
             <div>
                 <div>
-                    <p:inputText class="mb" id="username" placeholder="Username" value="#{loginController.username}" required="true">
+                    <p:inputText styleClass="mb-10" id="username" placeholder="Username"
+                                 value="#{loginController.username}" required="true">
                         <f:event type="postValidate" listener="#{loginController.postValidateName}"/>
                     </p:inputText>
                 </div>
@@ -29,11 +30,11 @@
                             placeholder="Passwort"
                             type="password"
                             required="true"
-                            class="mb"
+                            styleClass="mb-10"
                             validator="#{loginController.validateLogin}"
                             value="#{loginController.password}"/>
                 </div>
-                <p:message for="pass" class="mb"/>
+                <p:message for="pass" styleClass="mb-10"/>
             </div>
 
             <p:commandButton value="Login" ajax="false" action="#{loginController.submitLogin()}"/>
