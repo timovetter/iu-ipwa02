@@ -13,19 +13,36 @@
       <h1>Ghost Net Fishing - Registrieren</h1>
 
       <h:form>
-         <p:inputText placeholder="Username" class="mb" value="#{registerController.username}" /><br/>
-         <p:inputText placeholder="Telefonnummer" class="mb" value="#{registerController.phone}"/><br/>
-         <p:inputText type="password" class="mb" placeholder="Passwort" value="#{registerController.password}"/><br/>
+         <div>
+            <p:inputText id="username" placeholder="Username" required="true" value="#{registerController.username}" validator="#{registerController.validateUsername}" />
+            <br/>
+            <p:message for="username" styleClass="mb"/>
+         </div>
+
+         <div>
+            <p:inputText id="password" placeholder="Passwort" class="mb" required="true" value="#{registerController.password}" type="password"/>
+            <br/>
+            <p:message for="password" styleClass="mb"/><br/>
+         </div>
 
          <p:outputLabel class="font">Ich bin...</p:outputLabel>
          <div class="flex-center">
-               <p:selectOneRadio id="page" value="#{registerController.type}" layout="pageDirection">
-                  <f:selectItem itemLabel="Meldende Person" itemValue="REPORTING"/>
-                  <f:selectItem itemLabel="Bergende Person" itemValue="SALVAGE"/>
-               </p:selectOneRadio>
+            <p:selectOneRadio id="page" style="margin-bottom: 30px" required="true" value="#{registerController.type}" layout="pageDirection">
+               <f:selectItem itemLabel="Meldende Person" itemValue="REPORTING"/>
+               <f:selectItem itemLabel="Bergende Person" itemValue="SALVAGE"/>
+               <f:event type="postValidate" listener="#{registerController.postValidateType}"/>
+            </p:selectOneRadio>
+            <p:message for="page" styleClass="mb"/><br/>
          </div>
 
-         <p:commandButton value="Registrieren" action="#{registerController.register()}"/>
+         <div>
+            <p:inputText id="phone" placeholder="Telefonnummer" validator="#{registerController.validatePhone}" value="#{registerController.phone}">
+            </p:inputText>
+            <br/>
+            <p:message for="phone" styleClass="mb" style="margin-top: 10px"/><br/>
+         </div>
+
+         <p:commandButton value="Registrieren" ajax="false" action="#{registerController.register()}"/>
       </h:form>
    </div>
 </h:body>

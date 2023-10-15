@@ -53,18 +53,4 @@ public class GhostNet {
     public void setStatus(GhostNetStatus status) {
         this.status = status;
     }
-
-    public String getGermanStatus() {
-        switch (this.status) {
-            case REPORTED:
-                return "Gemeldet";
-            case LOST:
-                return "Verschollen";
-            case RESCUED:
-                return "Geborgen";
-            case PENDING_RESCUE:
-                return "Bergung bevorstehend";
-        }
-        return "";
-    }
 }

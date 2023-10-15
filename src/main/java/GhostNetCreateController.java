@@ -1,6 +1,8 @@
 import dao.GhostNetDAO;
 import entities.GhostNet;
 import entities.GhostNetStatus;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
@@ -18,7 +20,6 @@ public class GhostNetCreateController implements Serializable {
     public GhostNetCreateController() {
         this.ghostNetDAO = new GhostNetDAO();
     }
-
 
     public float getLongitude() {
         return longitude;
@@ -47,5 +48,13 @@ public class GhostNetCreateController implements Serializable {
     public void createGhostNet() {
         GhostNet gn = new GhostNet(this.longitude, this.latitude, GhostNetStatus.REPORTED, this.size);
         this.ghostNetDAO.add(gn);
+        FacesContext.getCurrentInstance().addMessage("sticky-key", new FacesMessage(FacesMessage.SEVERITY_INFO, "Aktion erfolgreich", "Das Geisternetz wurde erfolgreich erstellt."));
+        this.resetForm();
+    }
+
+    private void resetForm() {
+        this.longitude = 0;
+        this.latitude = 0;
+        this.size = 1;
     }
 }

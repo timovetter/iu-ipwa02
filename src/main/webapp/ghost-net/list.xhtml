@@ -21,42 +21,54 @@
             </div>
         </div>
 
-        <p:dataTable id="ghostnets" var="gn" value="#{ghostNetListController.ghostNetList}" rowKey="#{gn.id}">
-            <f:facet name="header">Geisternetze</f:facet>
+        <h:form>
+            <p:dataTable id="ghostnets" widgetVar="ghostnetTable" var="gn" value="#{ghostNetListController.ghostNetList}" rowKey="#{gn.id}">
+                <f:facet name="header">Geisternetze</f:facet>
 
-            <p:column headerText="ID">
-                <h:outputText value="#{gn.id}"/>
-            </p:column>
+                <p:column headerText="ID">
+                    <h:outputText value="#{gn.id}"/>
+                </p:column>
 
-            <p:column headerText="Koordinaten (lat,lon)">
-                <h:outputText value="#{gn.latitude}, #{gn.longitude}"/>
-            </p:column>
+                <p:column headerText="Koordinaten (lat,lon)">
+                    <h:outputText value="#{gn.latitude}, #{gn.longitude}"/>
+                </p:column>
 
-            <p:column headerText="Status">
-                <h:outputText value="#{gn.status}"/>
-            </p:column>
+                <p:column headerText="Status" filterMatchMode="exact" filterBy="#{gn.status}">
+                    <h:outputText value="#{gn.status}"/>
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('ghostnetTable').filter()" styleClass="w-full">
+                            <f:selectItem itemLabel="Alle" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{['REPORTED', 'PENDING_RESCUE', 'RESCUED', 'LOST']}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                </p:column>
 
-            <p:column headerText="Größe">
-                <h:outputText value="#{gn.size} Quadratmeter"/>
-            </p:column>
+                <p:column headerText="Größe">
+                    <h:outputText value="#{gn.size} Quadratmeter"/>
+                </p:column>
 
-            <p:column headerText="Bergende Person">
-                <h:outputText value="#{gn.user.username}" />
-            </p:column>
+                <p:column headerText="Bergende Person">
+                    <h:outputText value="#{gn.user.username}" />
+                </p:column>
 
-            <p:column headerText="Aktionen">
-                <p:commandLink
-                        value="Für Bergung eintragen"
-                        rendered="#{userContext.user.type == 'SALVAGE' and gn.user == null}"
-                        action="#{ghostNetListController.addSalvageUser(userContext.user, gn)}"/>
-                <p:commandLink
-                    value="Netz geborgen"
-                    rendered="#{gn.status == 'PENDING_RESCUE'}"
-                    action="#{ghostNetListController.netRescued(gn)}"
-                    />
-            </p:column>
+                <p:column headerText="Aktionen">
+                    <p:commandLink
+                            value="Für Bergung eintragen"
+                            rendered="#{userContext.user.type == 'SALVAGE' and gn.user == null}"
+                            action="#{ghostNetListController.addSalvageUser(userContext.user, gn)}">
+                        <p:ajax event="click" update="ghostnets"/>
+                    </p:commandLink>
+                    <p:commandLink
+                            value="Netz geborgen"
+                            rendered="#{gn.status == 'PENDING_RESCUE' and gn.user.username == userContext.user.username}"
+                            action="#{ghostNetListController.netRescued(gn)}"
+                    >
+                        <p:ajax event="click" update="ghostnets"/>
+                    </p:commandLink>
+                </p:column>
 
-        </p:dataTable>
+            </p:dataTable>
+        </h:form>
     </div>
 </h:body>
 </html>
