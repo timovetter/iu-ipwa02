@@ -60,12 +60,8 @@ public class LoginController implements Serializable {
     }
 
     public void validateLogin(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        Map<String, String> filter = new HashMap<>();
-        filter.put("username", username);
-        filter.put("password", (String) value);
-
         try {
-            user = this.userDAO.findOne(filter);
+            user = this.userDAO.findWithUsernameAndPassword(username, (String) value);
         } catch (NoResultException e) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falscher Login!", null));
         }

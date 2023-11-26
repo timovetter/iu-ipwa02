@@ -3,6 +3,7 @@ package dao;
 import entities.User;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.Map;
 
 public class UserDAO {
@@ -19,12 +20,27 @@ public class UserDAO {
         manager.close();
     }
 
-    public User findOne(Map<String, String> filter) throws NoResultException {
+    public User findWithUsername(String username) throws NoResultException {
+        Map<String, String> filter = new HashMap<>();
+        filter.put("username", username);
+
         String sqlStatement = this.buildSQL(filter);
         EntityManager manager = emf.createEntityManager();
         Query query = manager.createQuery(sqlStatement);
         return (User) query.getSingleResult();
     }
+
+    public User findWithUsernameAndPassword(String username, String password) throws NoResultException {
+        Map<String, String> filter = new HashMap<>();
+        filter.put("username", username);
+        filter.put("password", password);
+
+        String sqlStatement = this.buildSQL(filter);
+        EntityManager manager = emf.createEntityManager();
+        Query query = manager.createQuery(sqlStatement);
+        return (User) query.getSingleResult();
+    }
+
 
     private String buildSQL(Map<String, String> filter) {
         StringBuilder sqlStatement = new StringBuilder();
